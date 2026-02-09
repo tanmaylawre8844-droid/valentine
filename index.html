@@ -59,9 +59,9 @@ font-size:28px;
 
 <div id="question">
 
-<h1 id="mainText">Hey Sanu ❤️ My baby… will you be my Valentine?</h1>
+<h1>Hey Sanu ❤️ My baby… will you be my Valentine?</h1>
 
-<!-- NO comes first -->
+<!-- NO first -->
 <button id="noBtn" onclick="noClicked()">NO 😜</button>
 <button id="yesBtn" onclick="yesClicked()">YES 😍</button>
 
@@ -96,31 +96,36 @@ document.getElementById("yesPage").style.display="block";
 
 function noClicked(){
 
+let noBtn = document.getElementById("noBtn");
+
 noClicks++;
 
+// change ONLY NO button text
 if(noClicks <= messages.length){
-document.getElementById("mainText").innerHTML = messages[noClicks-1];
+noBtn.innerHTML = messages[noClicks-1];
 }
 
+// YES button grows bigger
 yesSize += 0.3;
 document.getElementById("yesBtn").style.transform =
 "scale("+yesSize+")";
 
-let noBtn = document.getElementById("noBtn");
-
+// NO runs away initially
 if(noClicks < 3){
 noBtn.style.position="absolute";
 noBtn.style.left=Math.random()*80+"%";
 noBtn.style.top=Math.random()*80+"%";
 }
 
-if(noClicks >= 3){
+// Move near YES after few clicks
+if(noClicks >=3){
 noBtn.style.position="relative";
-noBtn.style.marginLeft="-40px"; // moves close to YES
+noBtn.style.marginLeft="-40px";
 }
 
+// Hide NO completely 😈
 if(noClicks >=5){
-noBtn.style.display="none"; // disappears 😈
+noBtn.style.display="none";
 }
 
 }
