@@ -3,7 +3,6 @@
 <head>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Can I Ask You Something?</title>
 
 <style>
@@ -61,7 +60,7 @@ font-size:28px;
 
 <h1>Hey Sanu ❤️ My baby… will you be my Valentine?</h1>
 
-<!-- NO first -->
+<!-- FIRST OPTION = NO -->
 <button id="noBtn" onclick="noClicked()">NO 😜</button>
 <button id="yesBtn" onclick="yesClicked()">YES 😍</button>
 
@@ -81,7 +80,8 @@ font-size:28px;
 let yesSize = 1;
 let noClicks = 0;
 
-let messages = [
+// text that replaces ONLY the NO button each click
+let noMessages = [
 "Are you sure? 🥺",
 "You better say YES 😌❤️",
 "Babyyy please 😭💘",
@@ -97,33 +97,33 @@ document.getElementById("yesPage").style.display="block";
 function noClicked(){
 
 let noBtn = document.getElementById("noBtn");
+let yesBtn = document.getElementById("yesBtn");
 
 noClicks++;
 
-// change ONLY NO button text
-if(noClicks <= messages.length){
-noBtn.innerHTML = messages[noClicks-1];
+// change NO button text step by step
+if(noClicks <= noMessages.length){
+noBtn.innerHTML = noMessages[noClicks-1];
 }
 
-// YES button grows bigger
-yesSize += 0.3;
-document.getElementById("yesBtn").style.transform =
-"scale("+yesSize+")";
+// grow YES button every click 😈
+yesSize += 0.25;
+yesBtn.style.transform = "scale("+yesSize+")";
 
-// NO runs away initially
+// first few clicks → NO runs away
 if(noClicks < 3){
 noBtn.style.position="absolute";
 noBtn.style.left=Math.random()*80+"%";
 noBtn.style.top=Math.random()*80+"%";
 }
 
-// Move near YES after few clicks
+// after few clicks → NO moves beside YES
 if(noClicks >=3){
 noBtn.style.position="relative";
 noBtn.style.marginLeft="-40px";
 }
 
-// Hide NO completely 😈
+// finally hide NO
 if(noClicks >=5){
 noBtn.style.display="none";
 }
