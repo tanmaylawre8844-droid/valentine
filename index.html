@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title> Can I Ask You Something? </title>
+<title>Can I Ask You Something?</title>
 
 <style>
 
@@ -15,23 +16,20 @@ justify-content:center;
 align-items:center;
 background:linear-gradient(135deg,#ff758c,#ff7eb3);
 font-family:Arial;
-overflow:hidden;
 text-align:center;
-}
-
-.container{
-padding:20px;
+overflow:hidden;
 }
 
 h1{
 color:white;
-font-size:32px;
+font-size:30px;
+padding:20px;
 }
 
 button{
 padding:15px 25px;
 font-size:22px;
-margin:15px;
+margin:10px;
 border:none;
 border-radius:12px;
 cursor:pointer;
@@ -53,32 +51,23 @@ color:white;
 font-size:28px;
 }
 
-.heart{
-position:absolute;
-animation: float 5s linear infinite;
-}
-
-@keyframes float{
-from{transform:translateY(100vh);}
-to{transform:translateY(-10vh);}
-}
-
 </style>
 
 </head>
 
 <body>
 
-<div class="container" id="question">
+<div id="question">
 
-<h1>Hey Sanu ❤️ My baby… will you be my Valentine?</h1>
+<h1 id="mainText">Hey Sanu ❤️ My baby… will you be my Valentine?</h1>
 
+<!-- NO comes first -->
+<button id="noBtn" onclick="noClicked()">NO 😜</button>
 <button id="yesBtn" onclick="yesClicked()">YES 😍</button>
-<button id="noBtn" onclick="moveButton()">NO 😜</button>
 
 </div>
 
-<div class="container" id="yesPage">
+<div id="yesPage">
 
 <h1>YAYYYY ❤️🥰</h1>
 <p>You just made Tanmay very happy 😎❤️</p>
@@ -90,37 +79,51 @@ to{transform:translateY(-10vh);}
 <script>
 
 let yesSize = 1;
+let noClicks = 0;
+
+let messages = [
+"Are you sure? 🥺",
+"You better say YES 😌❤️",
+"Babyyy please 😭💘",
+"Don't break my heart 🥹❤️",
+"Last chance 😏💕"
+];
 
 function yesClicked(){
 document.getElementById("question").style.display="none";
 document.getElementById("yesPage").style.display="block";
 }
 
-function moveButton(){
+function noClicked(){
 
-let btn=document.getElementById("noBtn");
+noClicks++;
 
-btn.style.position="absolute";
-btn.style.left=Math.random()*80+"%";
-btn.style.top=Math.random()*80+"%";
+if(noClicks <= messages.length){
+document.getElementById("mainText").innerHTML = messages[noClicks-1];
+}
 
-yesSize += 0.2;   // YES button grows each time
-
+yesSize += 0.3;
 document.getElementById("yesBtn").style.transform =
 "scale("+yesSize+")";
 
+let noBtn = document.getElementById("noBtn");
+
+if(noClicks < 3){
+noBtn.style.position="absolute";
+noBtn.style.left=Math.random()*80+"%";
+noBtn.style.top=Math.random()*80+"%";
 }
 
-// floating hearts
-setInterval(function(){
-let heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="❤️";
-heart.style.left=Math.random()*100+"vw";
-heart.style.fontSize=(Math.random()*20+15)+"px";
-document.body.appendChild(heart);
-setTimeout(()=>{heart.remove();},5000);
-},400);
+if(noClicks >= 3){
+noBtn.style.position="relative";
+noBtn.style.marginLeft="-40px"; // moves close to YES
+}
+
+if(noClicks >=5){
+noBtn.style.display="none"; // disappears 😈
+}
+
+}
 
 </script>
 
