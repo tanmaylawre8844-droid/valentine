@@ -1,62 +1,66 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Be My Valentine ❤️</title>
 
 <style>
 
 body{
-    margin:0;
-    height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-    font-family:Arial;
-    overflow:hidden;
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#ff758c,#ff7eb3);
+font-family:Arial;
+overflow:hidden;
+text-align:center;
 }
 
 .container{
-    text-align:center;
+padding:20px;
 }
 
 h1{
-    color:white;
-    font-size:32px;
+color:white;
+font-size:32px;
 }
 
 button{
-    padding:15px 25px;
-    font-size:18px;
-    margin:15px;
-    border:none;
-    border-radius:10px;
-    cursor:pointer;
+padding:15px 25px;
+font-size:22px;
+margin:15px;
+border:none;
+border-radius:12px;
+cursor:pointer;
+transition:0.3s;
 }
 
 #yesBtn{
-    background:#ff4d6d;
-    color:white;
+background:#ff004f;
+color:white;
 }
 
 #noBtn{
-    background:white;
+background:white;
 }
 
 #yesPage{
-    display:none;
-    color:white;
+display:none;
+color:white;
+font-size:28px;
 }
 
 .heart{
-    position:absolute;
-    color:red;
-    animation: float 5s linear infinite;
+position:absolute;
+animation: float 5s linear infinite;
 }
 
 @keyframes float{
-    from{transform:translateY(100vh);}
-    to{transform:translateY(-10vh);}
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
 }
 
 </style>
@@ -70,48 +74,53 @@ button{
 <h1>Will you be my Valentine? ❤️</h1>
 
 <button id="yesBtn" onclick="yesClicked()">YES 😍</button>
-<button id="noBtn" onmouseover="moveButton()">NO 😜</button>
+<button id="noBtn" onclick="moveButton()">NO 😜</button>
 
 </div>
 
 <div class="container" id="yesPage">
 
 <h1>YAYYYY ❤️🥰</h1>
-<h2>You just made Tanmay very happy 😎❤️</h2>
+<p>You just made Tanmay very happy 😎❤️</p>
 
-<img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" width="300">
+<img src="https://media.giphy.com/media/MDJ9IbxxvDUQM/giphy.gif" width="250">
 
 </div>
 
-<audio autoplay loop>
-<source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mp3">
-</audio>
-
 <script>
 
+let yesSize = 1;
+
 function yesClicked(){
-    document.getElementById("question").style.display="none";
-    document.getElementById("yesPage").style.display="block";
+document.getElementById("question").style.display="none";
+document.getElementById("yesPage").style.display="block";
 }
 
 function moveButton(){
-    var btn=document.getElementById("noBtn");
-    btn.style.position="absolute";
-    btn.style.left=Math.random()*80+"%";
-    btn.style.top=Math.random()*80+"%";
+
+let btn=document.getElementById("noBtn");
+
+btn.style.position="absolute";
+btn.style.left=Math.random()*80+"%";
+btn.style.top=Math.random()*80+"%";
+
+yesSize += 0.2;   // YES button grows each time
+
+document.getElementById("yesBtn").style.transform =
+"scale("+yesSize+")";
+
 }
 
-// Floating hearts
+// floating hearts
 setInterval(function(){
-    let heart=document.createElement("div");
-    heart.className="heart";
-    heart.innerHTML="❤️";
-    heart.style.left=Math.random()*100+"vw";
-    heart.style.fontSize=(Math.random()*20+10)+"px";
-    document.body.appendChild(heart);
-
-    setTimeout(()=>{heart.remove();},5000);
-},300);
+let heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML="❤️";
+heart.style.left=Math.random()*100+"vw";
+heart.style.fontSize=(Math.random()*20+15)+"px";
+document.body.appendChild(heart);
+setTimeout(()=>{heart.remove();},5000);
+},400);
 
 </script>
 
